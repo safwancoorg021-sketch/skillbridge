@@ -1,0 +1,34 @@
+.student-help-content { width: min(100%, 1350px); margin: 0 auto; }
+.student-help-message { margin: 0 0 14px; padding: 11px 13px; border-radius: 8px; font-size: 11px; }
+.student-help-message.error { color: #9b2432; background: #fff0f1; }
+.student-help-message.success { color: #087451; background: #eaf9f2; }
+.student-help-layout { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); align-items: start; gap: 16px; }
+.student-help-form,.student-help-requests { padding: 20px; border: 1px solid #ebe9f5; border-radius: 13px; background: #fff; box-shadow: 0 4px 16px rgba(35,32,70,.04); }
+.student-help-form { display: grid; gap: 14px; }
+.student-help-form h2,.student-help-requests h2 { margin: 0; color: #282938; font-size: 17px; }
+.student-help-form > div p,.student-help-requests-heading p { margin: 5px 0 0; color: #747586; font-size: 10px; line-height: 1.5; }
+.student-help-form label { display: grid; gap: 6px; color: #454655; font-size: 10px; font-weight: 650; }
+.student-help-form input,.student-help-form select,.student-help-form textarea { width: 100%; min-height: 39px; padding: 9px 11px; color: #292a38; border: 1px solid #e2e0eb; border-radius: 8px; background: #fff; font: inherit; font-size: 11px; }
+.student-help-form textarea { min-height: 130px; resize: vertical; line-height: 1.5; }
+.student-help-form label small { justify-self: end; color: #858696; font-size: 9px; font-weight: 400; }
+.student-help-form > button { min-height: 40px; padding: 0 15px; color: #fff; border: 0; border-radius: 8px; background: #5145e8; font-size: 11px; font-weight: 700; cursor: pointer; }
+.student-help-form > button:disabled { cursor: default; opacity: .55; }
+.student-help-requests { min-height: 250px; }
+.student-help-requests-heading { margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.student-help-requests-heading > span { min-width: 26px; height: 26px; padding: 0 6px; display: grid; place-items: center; color: #5145e8; border-radius: 999px; background: #f0efff; font-size: 10px; font-weight: 750; }
+.student-help-empty { padding: 30px 10px; color: #747586; font-size: 11px; text-align: center; }
+.student-help-ticket-list { display: grid; gap: 11px; }
+.student-help-ticket { padding: 14px; border: 1px solid #eeedf5; border-radius: 10px; }
+.student-help-ticket-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.student-help-ticket-head > div > span { color: #777889; font-size: 9px; }
+.student-help-ticket h3 { margin: 4px 0 0; color: #292a38; font-size: 13px; }
+.student-help-status { padding: 5px 8px; color: #9a5d00; border-radius: 999px; background: #fff5df; font-size: 9px; font-weight: 700; white-space: nowrap; }
+.student-help-status.in_progress { color: #344fc4; background: #eef1ff; }
+.student-help-status.resolved { color: #087451; background: #eaf9f2; }
+.student-help-ticket-message { margin: 10px 0 0; color: #555767; font-size: 10px; line-height: 1.55; white-space: pre-wrap; }
+.student-help-reply { margin-top: 11px; padding: 11px; border-left: 3px solid #5145e8; border-radius: 0 7px 7px 0; background: #f5f4ff; }
+.student-help-reply strong { color: #3930bd; font-size: 10px; }
+.student-help-reply small { margin-left: 8px; color: #777889; font-size: 8px; }
+.student-help-reply p { margin: 6px 0 0; color: #454655; font-size: 10px; line-height: 1.55; white-space: pre-wrap; }
+@media (max-width: 780px) { .student-help-layout { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .student-help-form,.student-help-requests { padding: 15px; } .student-help-ticket-head { flex-direction: column; } }

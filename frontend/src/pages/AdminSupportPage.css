@@ -1,0 +1,20 @@
+.admin-support-toolbar { margin-bottom: 16px; display: flex; align-items: flex-end; gap: 14px; }
+.admin-support-toolbar label { min-width: 190px; flex: 1; display: flex; flex-direction: column; gap: 6px; color: #686a7b; font-size: 11px; font-weight: 650; }
+.admin-support-toolbar input,.admin-support-toolbar select,.admin-support-status select { min-height: 39px; padding: 0 11px; color: #292a38; border: 1px solid #e2e0eb; border-radius: 8px; background: #fff; font: inherit; }
+.admin-support-toolbar > strong { padding: 10px 0; color: #686a7b; font-size: 11px; white-space: nowrap; }
+.admin-support-empty { padding: 32px; color: #737586; text-align: center; }
+.admin-support-list { display: grid; gap: 13px; }
+.admin-support-ticket { padding: 18px; }
+.admin-support-ticket-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.admin-support-category { color: #5145e8; font-size: 9px; font-weight: 750; text-transform: uppercase; letter-spacing: .4px; }
+.admin-support-ticket h2 { margin: 5px 0; color: #262735; font-size: 16px; }
+.admin-support-ticket-head p { margin: 0; color: #737586; font-size: 10px; }
+.admin-support-status { min-width: 145px; display: flex; flex-direction: column; gap: 5px; color: #686a7b; font-size: 10px; }
+.admin-support-message { margin: 15px 0; padding: 13px; color: #444655; border-radius: 8px; background: #f7f6fb; font-size: 12px; line-height: 1.6; white-space: pre-wrap; }
+.admin-support-reply { display: grid; gap: 8px; }
+.admin-support-reply label { color: #454655; font-size: 10px; font-weight: 700; }
+.admin-support-reply textarea { width: 100%; min-height: 78px; padding: 10px; resize: vertical; color: #292a38; border: 1px solid #e2e0eb; border-radius: 8px; font: inherit; font-size: 11px; }
+.admin-support-reply > div { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.admin-support-reply small { color: #777889; font-size: 9px; }
+.admin-support-reply button { min-height: 34px; }
+@media (max-width: 640px) { .admin-support-toolbar { align-items: stretch; flex-direction: column; } .admin-support-toolbar label { min-width: 0; } .admin-support-toolbar > strong { padding: 0; } .admin-support-ticket-head { flex-direction: column; } .admin-support-status { width: 100%; } }

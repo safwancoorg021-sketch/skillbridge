@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillBridge Google Test</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <h1>SkillBridge — Google Sign-In Test</h1>
+  <p>Use this page to test Google authentication.</p>
+
+  <div id="g_id_onload"
+       data-client_id="888955078737-jn4f4lmbkcmks5jtvfr7j6rld2oihb1c.apps.googleusercontent.com"
+       data-callback="handleGoogleResponse"
+       data-auto_prompt="false">
+  </div>
+
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="signin_with"
+       data-shape="rectangular">
+  </div>
+
+  <h3>Google ID Token</h3>
+  <textarea id="token" rows="8" cols="70"
+    placeholder="Your ID token will appear here after sign-in."
+    readonly></textarea>
+
+  <script>
+    function handleGoogleResponse(response) {
+      document.getElementById("token").value = response.credential;
+    }
+  </script>
+</body>
+</html>

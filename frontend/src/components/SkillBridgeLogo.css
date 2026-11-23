@@ -1,0 +1,56 @@
+.sb-logo {
+  --sb-logo-ink: #20212b;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 9px;
+  color: var(--sb-logo-ink);
+  white-space: nowrap;
+}
+
+.sb-logo--inverse { --sb-logo-ink: #fff; }
+
+.sb-logo-mark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #fff;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #5745ed 0%, #3524c9 100%);
+}
+
+.sb-logo-mark svg {
+  width: 66%;
+  height: 66%;
+  stroke: currentColor;
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sb-logo-mark circle { fill: currentColor; stroke: none; }
+
+.sb-logo-word {
+  color: var(--sb-logo-ink);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1;
+}
+
+.sb-logo--small { gap: 8px; }
+.sb-logo--small .sb-logo-mark { width: 34px; height: 34px; border-radius: 10px; }
+.sb-logo--small .sb-logo-word { font-size: 17px; letter-spacing: -0.65px; }
+
+.sb-logo--large { gap: 12px; }
+.sb-logo--large .sb-logo-mark { width: 54px; height: 54px; border-radius: 15px; }
+.sb-logo--large .sb-logo-word { font-size: 27px; letter-spacing: -1px; }
+
+@media (max-width: 400px) {
+  .sb-logo--large { gap: 9px; }
+  .sb-logo--large .sb-logo-mark { width: 44px; height: 44px; border-radius: 13px; }
+  .sb-logo--large .sb-logo-word { font-size: 22px; }
+}

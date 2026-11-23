@@ -1,0 +1,97 @@
+{
+  "info": {
+    "name": "SkillBridge — Week 3 API",
+    "description": "Student checkout, Razorpay order verification, enrollment, offers, and admin commerce endpoints. Set the collection variables before sending requests. Never put Razorpay secrets in this collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5001/api" },
+    { "key": "studentToken", "value": "" },
+    { "key": "adminToken", "value": "" },
+    { "key": "courseId", "value": "" },
+    { "key": "couponId", "value": "" },
+    { "key": "offerId", "value": "" },
+    { "key": "userId", "value": "" },
+    { "key": "providerOrderId", "value": "" },
+    { "key": "razorpayPaymentId", "value": "" },
+    { "key": "razorpaySignature", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Student checkout",
+      "item": [
+        {
+          "name": "Browse published courses",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }], "url": "{{baseUrl}}/courses?limit=20&page=1" }
+        },
+        {
+          "name": "Add course to cart",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"courseId\": \"{{courseId}}\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/cart/items" }
+        },
+        {
+          "name": "View cart",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }], "url": "{{baseUrl}}/cart" }
+        },
+        {
+          "name": "Validate checkout coupon",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"code\": \"WELCOME10\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/payments/coupons/validate" }
+        },
+        {
+          "name": "Create checkout order",
+          "description": "Creates a server-priced Razorpay order. Copy orderId from the response to providerOrderId. A test payment must be completed in Razorpay Checkout before verification.",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"couponCode\": \"WELCOME10\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/payments/orders" }
+        },
+        {
+          "name": "Verify Razorpay payment",
+          "description": "Requires the real callback values returned by Razorpay Checkout; do not invent a signature.",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"razorpay_order_id\": \"{{providerOrderId}}\",\n  \"razorpay_payment_id\": \"{{razorpayPaymentId}}\",\n  \"razorpay_signature\": \"{{razorpaySignature}}\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/payments/verify" }
+        },
+        {
+          "name": "View enrolled courses and progress",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }], "url": "{{baseUrl}}/enrollments" }
+        },
+        {
+          "name": "View current offers",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }], "url": "{{baseUrl}}/offers" }
+        }
+      ]
+    },
+    {
+      "name": "Admin commerce",
+      "item": [
+        {
+          "name": "List students (search and pagination)",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/admin/users?page=1&limit=10&search=" }
+        },
+        {
+          "name": "Student registration summary",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/admin/users/summary" }
+        },
+        {
+          "name": "List payments (newest first)",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/admin/commerce/payments?page=1&limit=20&status=paid" }
+        },
+        {
+          "name": "Create coupon",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"code\": \"WELCOME10\",\n  \"discountType\": \"percentage\",\n  \"discountValue\": 10,\n  \"minOrderAmount\": 0,\n  \"maxDiscountAmount\": 0,\n  \"startsAt\": \"2026-01-01T00:00:00.000Z\",\n  \"endsAt\": \"2027-01-01T23:59:59.000Z\",\n  \"isActive\": true\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/admin/commerce/coupons" }
+        },
+        {
+          "name": "List coupons",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/admin/commerce/coupons" }
+        },
+        {
+          "name": "Create student offer",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Welcome to SkillBridge\",\n  \"description\": \"Save on your next paid course.\",\n  \"discountLabel\": \"10% off\",\n  \"couponCode\": \"WELCOME10\",\n  \"startsAt\": \"2026-01-01T00:00:00.000Z\",\n  \"endsAt\": \"2027-01-01T23:59:59.000Z\",\n  \"isActive\": true\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/admin/commerce/offers" }
+        },
+        {
+          "name": "List student offers",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/admin/commerce/offers" }
+        },
+        {
+          "name": "Reports and analytics",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/admin/commerce/reports" }
+        }
+      ]
+    }
+  ]
+}

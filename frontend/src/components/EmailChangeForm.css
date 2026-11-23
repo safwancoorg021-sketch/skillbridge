@@ -1,0 +1,24 @@
+.profile-email-change {
+  margin-top: 13px;
+  padding-top: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #eeedf4;
+}
+.profile-email-change h3 { margin: 0; color: #303140; font-size: 12px; }
+.profile-email-change p { margin: 3px 0 0; color: #777887; font-size: 10px; line-height: 1.45; }
+.profile-email-change form { display: flex; flex-direction: column; gap: 7px; }
+.profile-email-change label { color: #414251; font-size: 10px; font-weight: 650; }
+.profile-email-change input { width: 100%; min-width: 0; height: 36px; padding: 0 9px; color: #333442; border: 1px solid #e4e3ec; border-radius: 7px; background: #fff; font: inherit; font-size: 11px; }
+.profile-email-change input:focus-visible { outline: 3px solid rgba(81,69,232,.2); outline-offset: 1px; }
+.profile-email-change button { min-height: 33px; padding: 0 10px; color: #fff; border: 1px solid #5145e8; border-radius: 7px; background: #5145e8; font: inherit; font-size: 10px; font-weight: 650; cursor: pointer; }
+.profile-email-change button.secondary { color: #5145e8; border-color: #e1dfff; background: #f7f6ff; }
+.profile-email-change button:disabled { cursor: default; opacity: .52; }
+.profile-email-change .profile-email-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.profile-email-change .profile-email-actions button:last-child { margin-left: auto; }
+.profile-email-change .profile-email-countdown { color: #747585; font-size: 9px; }
+.profile-email-change .profile-email-code-sent { margin: 0; font-size: 10px; }
+.profile-email-feedback { margin: 0 !important; font-size: 10px !important; }
+.profile-email-feedback.error { color: #b42334 !important; }
+.profile-email-feedback.success { color: #087b5b !important; }

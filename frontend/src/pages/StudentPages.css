@@ -1,0 +1,33 @@
+.student-offer-page-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.student-offer-page-card { min-height: 235px; padding: 21px; display: flex; flex-direction: column; align-items: flex-start; border: 1px solid #ebe9f5; border-radius: 14px; background: linear-gradient(145deg, #fff 0%, #f8f7ff 100%); box-shadow: 0 5px 18px rgba(35, 32, 70, .05); }
+.student-offer-page-badge { padding: 6px 10px; color: #fff; border-radius: 999px; background: #5145e8; font-size: 11px; font-weight: 750; }
+.student-offer-page-card h2 { margin: 15px 0 7px; font-size: 19px; }
+.student-offer-page-card > p { margin: 0 0 11px; color: #686a7b; font-size: 12px; line-height: 1.6; }
+.student-offer-page-card > small { color: #777889; font-size: 10px; }
+.student-offer-copy-message { margin: -10px 0 15px; color: #5145e8; font-size: 11px; }
+.student-offer-page-code { width: 100%; margin-top: 16px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px dashed #bcb7f6; border-radius: 9px; background: #fff; }
+.student-offer-page-code > span { display: flex; flex-direction: column; gap: 3px; }
+.student-offer-page-code small { color: #777889; font-size: 9px; }
+.student-offer-page-code strong { color: #4136d0; font-size: 13px; letter-spacing: .5px; }
+.student-offer-page-code button,.student-offer-page-browse,.learning-state button { min-height: 35px; padding: 0 13px; color: #fff; border: 0; border-radius: 7px; background: #5145e8; font-size: 10px; font-weight: 650; cursor: pointer; }
+.student-offer-page-browse { margin-top: auto; }
+.student-progress-overview { margin-bottom: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
+.student-progress-overview article { min-height: 106px; padding: 17px; display: flex; flex-direction: column; gap: 5px; border: 1px solid #ebe9f5; border-radius: 12px; background: #fff; box-shadow: 0 3px 12px rgba(35, 32, 70, .04); }
+.student-progress-overview article > span { color: #686a7b; font-size: 9px; font-weight: 750; letter-spacing: .45px; }
+.student-progress-overview article > strong { color: #332b9e; font-size: 27px; line-height: 1.1; }
+.student-progress-overview article > small { color: #777889; font-size: 10px; }
+.student-progress-list { display: grid; gap: 12px; }
+.student-progress-card { padding: 18px; border: 1px solid #ebe9f5; border-radius: 12px; background: #fff; }
+.student-progress-card-heading { margin-bottom: 13px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.student-progress-card-heading span { color: #5145e8; font-size: 9px; font-weight: 700; text-transform: uppercase; }
+.student-progress-card-heading h2 { margin: 5px 0 0; font-size: 16px; }
+.student-progress-card-heading > strong { color: #5145e8; font-size: 19px; }
+.student-progress-card-heading > strong.complete { color: #087b5b; }
+.student-progress-bar { height: 8px; overflow: hidden; border-radius: 999px; background: #eeedf5; }
+.student-progress-bar span { height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg, #5145e8, #2cc89b); transition: width .25s ease; }
+.student-progress-card-footer { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #777889; font-size: 10px; }
+.student-progress-card-footer button { min-height: 32px; padding: 0 10px; color: #5145e8; border: 1px solid #d9d6fb; border-radius: 7px; background: #fff; font-size: 10px; font-weight: 650; cursor: pointer; }
+.student-progress-card-footer > div { display:flex; flex-wrap:wrap; gap:7px; }
+.student-progress-card-footer button.student-progress-certificate { color:#087b5b; border-color:#bdebd9; background:#edfbf5; }
+@media (max-width: 700px) { .student-progress-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); } .student-progress-overview article:first-child { grid-column: 1 / -1; } }
+@media (max-width: 420px) { .student-progress-overview { grid-template-columns: 1fr; } .student-progress-overview article:first-child { grid-column: auto; } .student-progress-card-footer { align-items: flex-start; flex-direction: column; } }
