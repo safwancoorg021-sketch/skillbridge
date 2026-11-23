@@ -74,7 +74,7 @@ const startServer = async () => {
   try {
     await connectDB();
 
-    const PORT = process.env.PORT || 5001;
+    const PORT = process.env.PORT || (process.env.NODE_ENV === "production" ? 3000 : 5001);
 
     app.listen(PORT, () => {
       console.log(`SkillBridge server running on port ${PORT} from ${__dirname}`);

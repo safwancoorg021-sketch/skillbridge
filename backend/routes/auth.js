@@ -11,6 +11,7 @@ const EmailOTP = require("../models/EmailOTP");
 const transporter = require("../config/mailer");
 const authMiddleware = require("../middleware/authMiddleware");
 const { OAuth2Client } = require("google-auth-library");
+const { removeCloudinaryImage, storeCloudinaryImage } = require("../utils/cloudinaryImages");
 
 const googleClient = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID
@@ -35,6 +36,7 @@ const profileImageDirectory = path.join(__dirname, "..", "uploads", "profile-ima
 const profileImageUrlPrefix = "/uploads/profile-images/";
 
 async function removeStoredProfileImage(imageUrl) {
+  await removeCloudinaryImage(imageUrl, "profile-images");
   if (typeof imageUrl !== "string" || !imageUrl.startsWith(profileImageUrlPrefix)) return;
   const filename = imageUrl.slice(profileImageUrlPrefix.length);
   if (!/^[a-f0-9-]{36}\.jpg$/i.test(filename)) return;
@@ -911,26 +913,19 @@ router.post("/me/profile-image", authMiddleware, async (req, res) => {
     });
   }
 
-  const filename = `${crypto.randomUUID()}.jpg`;
-  const storedPath = path.join(profileImageDirectory, filename);
-  const imageUrl = `${profileImageUrlPrefix}${filename}`;
-
   try {
-    await fs.mkdir(profileImageDirectory, { recursive: true });
-    await fs.writeFile(storedPath, imageBytes, { flag: "wx" });
-
     const user = await User.findById(req.user.id);
     if (!user) {
-      await fs.unlink(storedPath).catch(() => {});
       return res.status(404).json({ success: false, message: "User not found." });
     }
 
+    const imageUrl = await storeCloudinaryImage(imageDataUrl, "profile-images");
     const oldImageUrl = user.profileImage;
     user.profileImage = imageUrl;
     try {
       await user.save();
     } catch (error) {
-      await fs.unlink(storedPath).catch(() => {});
+      await removeCloudinaryImage(imageUrl, "profile-images");
       throw error;
     }
     await removeStoredProfileImage(oldImageUrl);
@@ -951,9 +946,11 @@ router.post("/me/profile-image", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     console.error("Update profile image error:", error.message);
-    return res.status(500).json({
+    return res.status(error.status === 503 ? 503 : 500).json({
       success: false,
-      message: "Unable to update your profile photo right now.",
+      message: error.code === "CLOUDINARY_NOT_CONFIGURED"
+        ? "Profile photo storage is not configured on the server."
+        : "Unable to update your profile photo right now.",
     });
   }
 });

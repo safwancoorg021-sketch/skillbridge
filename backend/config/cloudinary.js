@@ -29,7 +29,7 @@ function configureCloudinary() {
 
 function getCloudinary() {
   if (!configureCloudinary()) {
-    const error = new Error("Cloudinary video storage is not configured.");
+    const error = new Error("Cloudinary storage is not configured.");
     error.code = "CLOUDINARY_NOT_CONFIGURED";
     error.status = 503;
     throw error;

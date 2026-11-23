@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm use 22
+        - npm --prefix frontend ci
+        - npm --prefix backend ci --omit=dev
+    build:
+      commands:
+        - npm --prefix frontend run build
+        - node scripts/packageAmplify.js
+  artifacts:
+    baseDirectory: .amplify-hosting
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - frontend/node_modules/**/*
+      - backend/node_modules/**/*

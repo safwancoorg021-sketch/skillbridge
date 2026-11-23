@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const crypto = require("crypto");
 const fs = require("fs/promises");
 const path = require("path");
 const Course = require("../models/Course");
@@ -7,6 +6,7 @@ const CourseModule = require("../models/CourseModule");
 const Lesson = require("../models/Lesson");
 const Enrollment = require("../models/Enrollment");
 const { removeStoredVideo } = require("../middleware/videoUpload");
+const { removeCloudinaryImage, storeCloudinaryImage } = require("../utils/cloudinaryImages");
 
 const sendError = (res, message, status = 500) => res.status(status).json({ success: false, message });
 const serialize = (course) => ({ ...course, id: String(course._id), _id: undefined });
@@ -29,13 +29,11 @@ async function storeThumbnail(imageDataUrl) {
   if (bytes.length > 1_000_000 || bytes.length < 4 || bytes[0] !== 0xff || bytes[1] !== 0xd8 || bytes[2] !== 0xff) {
     throw Object.assign(new Error("The thumbnail could not be processed. Choose another image."), { status: 400 });
   }
-  const filename = `${crypto.randomUUID()}.jpg`;
-  await fs.mkdir(thumbnailDirectory, { recursive: true });
-  await fs.writeFile(path.join(thumbnailDirectory, filename), bytes, { flag: "wx" });
-  return `${thumbnailUrlPrefix}${filename}`;
+  return storeCloudinaryImage(imageDataUrl, "course-thumbnails");
 }
 
 async function removeStoredThumbnail(imageUrl) {
+  await removeCloudinaryImage(imageUrl, "course-thumbnails");
   if (typeof imageUrl !== "string" || !imageUrl.startsWith(thumbnailUrlPrefix)) return;
   const filename = imageUrl.slice(thumbnailUrlPrefix.length);
   if (!/^[a-f0-9-]{36}\.jpg$/i.test(filename)) return;
