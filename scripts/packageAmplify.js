@@ -43,6 +43,7 @@ fs.writeFileSync(path.join(compute, "server.js"), [
   'process.env.NODE_ENV = "production";',
   'process.env.PORT ||= "3000";',
   'process.env.TRUST_PROXY_HOPS ||= "1";',
+  'process.env.SKILLBRIDGE_SSM_PATH ||= "/skillbridge/runtime";',
   'process.chdir(path.join(__dirname, "backend"));',
   'require(path.join(__dirname, "backend", "server.js"));',
   "",
