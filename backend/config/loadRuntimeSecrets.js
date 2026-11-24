@@ -40,6 +40,10 @@ async function loadRuntimeSecrets() {
 
     for (const parameter of response.Parameters || []) {
       const name = parameter.Name?.slice(parameterPath.length + 1);
+      // PORT is local server configuration, not a secret. Let Amplify provide
+      // the listener port instead of overriding it from Parameter Store.
+      if (name === "PORT") continue;
+
       if (!name || !ALLOWED_SECRET_NAMES.has(name)) {
         throw new Error("The SkillBridge runtime parameter path contains an unexpected parameter name.");
       }
@@ -61,3 +65,4 @@ async function loadRuntimeSecrets() {
 }
 
 module.exports = loadRuntimeSecrets;
+
